@@ -5,6 +5,7 @@ buttonEl.addEventListener("click", timerStart);
 
 function timerStart() {
   const timerEl = document.getElementById("timerBox");
+  //   ! ensure the timeLeft value back 60 seconds!!
   let timeLeft = 5;
   timerEl.className = "timer-box";
   const timeInterval = setInterval(function () {
