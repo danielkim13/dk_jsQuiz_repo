@@ -4,7 +4,8 @@
   --secondary-font-color: black;
   --q-box-bg-color: rgba(190, 184, 184, 0.521);
   --primary-hover-bg-color: rgba(108, 108, 224, 0.925);
-  --global-padding: 15px;
+  --global-padding: 10px;
+  --global-font: "Dosis", tahoma, verdana, helvetica;
 }
 
 * {
@@ -12,4 +13,37 @@
   padding: 0;
   text-decoration: none;
   list-style: none;
+}
+
+.header-container {
+  background-color: var(--main-bg-color);
+  display: flex;
+  color: var(--main-font-color);
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding: var(--global-padding);
+  position: sticky;
+  top: 0;
+}
+
+.image-container {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: var(--global-padding);
+}
+
+.image-container img {
+  height: 100%;
+}
+
+.score-container {
+  padding: var(--global-padding);
+}
+
+.score-container h3 {
+  font-family: var(--global-font);
+  font-weight: bold;
+  font-size: 25px;
 }
