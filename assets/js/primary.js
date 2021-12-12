@@ -4,12 +4,12 @@ const buttonEl = document.querySelector("#startButton");
 buttonEl.addEventListener("click", timerStart);
 
 function timerStart() {
-  const timerEl = document.getElementById("timer-box");
-  let timeLeft = 60;
-  timerEl.className = "font-setting";
+  const timerEl = document.getElementById("timerBox");
+  let timeLeft = 5;
+  timerEl.className = "timer-box";
   const timeInterval = setInterval(function () {
     if (timeLeft > 0) {
-      timerEl.textContent = timeLeft;
+      timerEl.textContent = "Time:  " + timeLeft;
       timeLeft--;
     } else {
       timerEl.textContent = "Time is Up";
