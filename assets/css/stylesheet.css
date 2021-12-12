@@ -14,6 +14,11 @@
   text-decoration: none;
   list-style: none;
 }
+.font-setting {
+  color: var(--main-font-color);
+  font-family: var(--global-font);
+  font-size: 25px;
+}
 
 .header-container {
   background-color: var(--main-bg-color);
