@@ -1,0 +1,15 @@
+:root {
+  --main-bg-color: black;
+  --main-font-color: white;
+  --secondary-font-color: black;
+  --q-box-bg-color: rgba(190, 184, 184, 0.521);
+  --primary-hover-bg-color: rgba(108, 108, 224, 0.925);
+  --global-padding: 15px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
