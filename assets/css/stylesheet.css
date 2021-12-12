@@ -25,6 +25,7 @@
   padding: var(--global-padding);
   position: sticky;
   top: 0;
+  flex-wrap: wrap;
 }
 
 .image-container {
@@ -38,6 +39,21 @@
   height: 100%;
 }
 
+.timer-container {
+  border: 2px solid white;
+  width: 300px;
+  height: 80px;
+  padding: var(--global-padding);
+  display: flex;
+  align-items: center;
+}
+
+.timer-box {
+  font-family: var(--global-font);
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .score-container {
   padding: var(--global-padding);
 }
@@ -46,4 +62,55 @@
   font-family: var(--global-font);
   font-weight: bold;
   font-size: 25px;
+}
+
+.quiz-overall-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.quiz-container {
+  background-color: var(--q-box-bg-color);
+  padding: var(--global-padding);
+  text-align: center;
+}
+
+.quiz-title,
+.quiz-body {
+  font-family: var(--global-font);
+}
+
+.quiz-title {
+  font-size: 35px;
+  font-weight: bolder;
+  padding-bottom: var(--global-padding);
+}
+
+.quiz-body {
+  font-size: 28px;
+  font-weight: normal;
+  padding: var(--global-padding);
+}
+
+.btn-container {
+  margin: 30px;
+  padding: var(--global-padding);
+}
+
+.start-btn {
+  width: 200px;
+  height: 40px;
+  font-weight: bolder;
+  font-size: 25px;
+  font-family: var(--global-font);
+  border: 3px solid rgb(8, 75, 17);
+  transition: 800ms ease all;
+}
+
+.start-btn:hover {
+  background-color: var(--primary-hover-bg-color);
+  color: var(--main-font-color);
 }
