@@ -78,6 +78,9 @@
   padding: var(--global-padding);
   text-align: center;
   box-shadow: 2px 2px 5px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .quiz-title,
@@ -100,6 +103,20 @@
 .btn-container {
   margin: 30px;
   padding: var(--global-padding);
+}
+
+.answer-selection {
+  font-family: var(--global-font);
+  color: var(--main-font-color);
+  background-color: rgb(49, 70, 99);
+  font-size: 28px;
+  padding: var(--global-padding);
+  margin: 15px;
+}
+
+.answer-list {
+  display: block;
+  align-items: center;
 }
 
 .start-btn {
