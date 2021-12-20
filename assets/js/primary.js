@@ -1,10 +1,11 @@
 const buttonEl = document.querySelector("#startButton");
+let timeLeft = 60;
+let questionArrayIndex = 0; //without this the loop only displays the last question on the page.
 
 // write a function where the btn is clicked and timer starts
 function timerStart() {
   const timerEl = document.getElementById("timerBox");
   //   ! ensure the timeLeft value back 60 seconds!!
-  let timeLeft = 5;
   timerEl.className = "timer-box";
   const timeInterval = setInterval(function () {
     if (timeLeft > 0) {
@@ -17,15 +18,13 @@ function timerStart() {
     }
   }, 1000);
 
-  quizPrompt();
+  quizPrompt(questionArrayIndex); //as timer begin, it calls for quizPrompt function
 }
 
 buttonEl.addEventListener("click", timerStart); //timer start event
 buttonEl.addEventListener("click", wipeIt); //wiping the first page info event
-// buttonEl.addEventListener("click", quizPrompt); //prompting quiz event
 
 // function that removes the h2 and p and button from the page after the start btn is pressed
-
 function wipeIt() {
   const titleEl = document.getElementById("quizTitle");
   const bodyEl = document.getElementById("quizBody");
@@ -65,42 +64,68 @@ const quizArray = [
   },
 ];
 
-// prompting the page after clicking the begin btn.
-let questionArrayIndex = 0; //without this the loop only displays the last question on the page.
+const quizTitleEl = document.getElementById("quizContainer");
+const quizQEl = document.createElement("h2");
+const answerEl = document.createElement("ul");
+const selectionListEl1 = document.createElement("li");
+const selectionListEl2 = document.createElement("li");
+const selectionListEl3 = document.createElement("li");
+// Giving credit to Rhea Malviya for helping me with not doing for loop method but the call on the function as arrayIndex increase. Initial attempt was to do it with for loop method but couldn't figure it out.
+function quizPrompt(questionArrayIndex) {
+  // create h2 element in the quiz container div
+  quizTitleEl.appendChild(quizQEl);
+  quizQEl.setAttribute("class", "quiz-title"); // for styling purpose
+  quizQEl.textContent = quizArray[questionArrayIndex].question; //display the question on the page
 
-function quizPrompt() {
-  const quizTitleEl = document.getElementById("quizContainer");
-  const quizQEl = document.createElement("h2");
-  const answerEl = document.createElement("ul");
-  const firstAnswer = document.createElement("li");
-  const secondAnswer = document.createElement("li");
-  const thirdAnswer = document.createElement("li");
-
-  quizQEl.setAttribute("class", "quiz-title");
-  //   answerEl.setAttribute("class", "answer-selection");
-  quizTitleEl.appendChild(quizQEl); //quiz question in h2 tag in the quiz container div
   quizTitleEl.appendChild(answerEl); // in quiz container div, create ul element where list of answers to go into
-  firstAnswer.setAttribute("class", "answer-selection");
-  secondAnswer.setAttribute("class", "answer-selection");
-  thirdAnswer.setAttribute("class", "answer-selection");
+  //   creating the list of answer option elements
+  answerEl.appendChild(selectionListEl1); // first answer option
+  selectionListEl1.setAttribute("class", "answer-selection"); //styling purpose
+  selectionListEl1.textContent = quizArray[questionArrayIndex].options[0]; // first answer option
 
-  for (let i = 0; i < quizArray.length; i++) {
-    let currentQuestion = quizArray[questionArrayIndex].question;
-    quizQEl.textContent = currentQuestion;
+  answerEl.appendChild(selectionListEl2); // second answer option
+  selectionListEl2.setAttribute("class", "answer-selection"); //styling purpose
+  selectionListEl2.textContent = quizArray[questionArrayIndex].options[1]; // second answer option
 
-    answerEl.appendChild(firstAnswer);
-    answerEl.appendChild(secondAnswer);
-    answerEl.appendChild(thirdAnswer);
+  answerEl.appendChild(selectionListEl3); // third answer option
+  selectionListEl3.setAttribute("class", "answer-selection"); //styling purpose
+  selectionListEl3.textContent = quizArray[questionArrayIndex].options[2]; // third answer option
 
-    firstAnswer.textContent = quizArray[questionArrayIndex].options[0];
-    secondAnswer.textContent = quizArray[questionArrayIndex].options[1];
-    thirdAnswer.textContent = quizArray[questionArrayIndex].options[2];
-  }
-
-  answerHandler();
-  questionArrayIndex++;
+  // create eventListener in order for the answer options behaves when clicked.
+  selectionListEl1.addEventListener("click", answerHandler);
+  selectionListEl2.addEventListener("click", answerHandler);
+  selectionListEl3.addEventListener("click", answerHandler);
 }
 
-var answerHandler = function () {
-     
-};
+// make the list clickable and compare answers.
+function answerHandler(event) {
+  const answerResultEl = document.createElement("p"); //need to remove it so made it global
+  const targetEl = event.target;
+
+  answerResultEl.setAttribute("class", "answer-result");
+  quizTitleEl.appendChild(answerResultEl);
+  // comparing answers to see if it was correct or wrong.
+  if (targetEl.textContent == quizArray[questionArrayIndex].answer) {
+    answerResultEl.textContent = "Correct Answer!";
+  }
+  if (targetEl.textContent !== quizArray[questionArrayIndex].answer) {
+    answerResultEl.textContent = "Wrong Answer!";
+    timeLeft += -5;
+  }
+
+  setTimeout(() => {
+    answerResultEl.style.display = "none";
+  }, 700);
+
+  // increase the index so another question can be presented
+  questionArrayIndex++;
+  // if and else statement to figure out if more quiz left or finish.
+  if (questionArrayIndex <= quizArray.length - 1) {
+    quizQEl.remove();
+    answerEl.remove();
+
+    quizPrompt(questionArrayIndex);
+  } else {
+    byeBye();
+  }
+}

@@ -114,6 +114,13 @@
   margin: 15px;
 }
 
+.answer-result {
+  font-family: var(--global-font);
+  color: black;
+  font-size: 25px;
+  font-style: italic;
+}
+
 .answer-list {
   display: block;
   align-items: center;
