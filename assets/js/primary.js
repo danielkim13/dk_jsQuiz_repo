@@ -239,26 +239,23 @@ function highScorePage() {
     }
   }
   // Do it Again btn and Clear local storage btn NEW NEW
-  const overAllContainer = document.querySelector('.quiz-overall-container');
-  const btnDiv = document.createElement('div')
+  const overAllContainer = document.querySelector(".quiz-overall-container");
+  const btnDiv = document.createElement("div");
   const againBtn = document.createElement("button");
   overAllContainer.appendChild(btnDiv);
   btnDiv.appendChild(againBtn);
   againBtn.className = "start-btn";
   againBtn.textContent = "Play Again";
-  againBtn.addEventListener('click', function(){
+  againBtn.addEventListener("click", function () {
     open("https://danielkim13.github.io/dk_jsQuiz_repo/");
   });
 
   const clearScoreBtn = document.createElement("button");
   btnDiv.appendChild(clearScoreBtn);
-  
+
   clearScoreBtn.className = "start-btn";
   clearScoreBtn.textContent = "Clear Scores";
-  clearScoreBtn.addEventListener('click', function(){
+  clearScoreBtn.addEventListener("click", function () {
     localStorage.clear();
   });
 }
-
-const scorePage = document.querySelector("#scoreContainer");
-scorePage.addEventListener("click", highScorePage);
