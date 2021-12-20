@@ -181,6 +181,9 @@ function addScore() {
   if (initials === "" || initials === null) {
     alert("You need to enter a valid initials");
     return;
+  } else if (initials.length > 3) {
+    alert("Please enter your initials");
+    return;
   } else {
     // Class instructor and TA provided below info
     let highScore = JSON.parse(localStorage.getItem("highScore"));
@@ -192,7 +195,7 @@ function addScore() {
         score: timeLeft,
       };
       highScore.push(score);
-    //   console.log(highScore);
+      //   console.log(highScore);
     }
 
     localStorage.setItem("highScore", JSON.stringify(highScore));
@@ -202,6 +205,5 @@ function addScore() {
 }
 
 function highScorePage() {
-    window.open
+  window.open;
 }
-
