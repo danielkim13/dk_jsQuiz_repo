@@ -197,4 +197,11 @@ function addScore() {
 
     localStorage.setItem("highScore", JSON.stringify(highScore));
   }
+
+  highScorePage();
 }
+
+function highScorePage() {
+    window.open
+}
+
