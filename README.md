@@ -49,4 +49,6 @@
 
 <hr />
 
-###Placeholder for the snapshot or gif
+### ScreenShot
+
+![](/assets/img/ch4shot.png)
