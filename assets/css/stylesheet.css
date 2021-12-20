@@ -141,3 +141,12 @@
   background-color: var(--primary-hover-bg-color);
   color: var(--main-font-color);
 }
+
+.initial {
+  font-family: var(--global-font);
+  font-size: 30px;
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  resize: none;
+}

@@ -2,6 +2,7 @@ const buttonEl = document.querySelector("#startButton");
 let timeLeft = 60;
 let questionArrayIndex = 0; //without this the loop only displays the last question on the page.
 let timeInterval;
+let score;
 
 // write a function where the btn is clicked and timer starts
 let timerEl = document.getElementById("timerBox");
@@ -20,25 +21,6 @@ function timerStart() {
   }, 1000);
 
   quizPrompt(questionArrayIndex); //as timer begin, it calls for quizPrompt function
-}
-
-function done() {
-  clearInterval(timeInterval);
-  timerEl.style.display = "none";
-  quizQEl.remove();
-  answerEl.remove();
-
-  const endTitle = document.createElement("h1");
-  const yourScore = document.createElement("p");
-
-  endTitle.className = "quiz-title";
-  yourScore.className = "quiz-body";
-
-  quizTitleEl.appendChild(endTitle);
-  quizTitleEl.appendChild(yourScore);
-
-  endTitle.textContent = "You are finished. Good job!";
-  yourScore.textContent = "Score: " + timeLeft;
 }
 
 buttonEl.addEventListener("click", timerStart); //timer start event
@@ -149,5 +131,70 @@ function answerHandler(event) {
   }
   if (questionArrayIndex === quizArray.length) {
     done();
+  }
+}
+// end of the quiz page
+function done() {
+  clearInterval(timeInterval);
+  timerEl.style.display = "none";
+  quizQEl.remove();
+  answerEl.remove();
+
+  const endTitle = document.createElement("h1");
+  const yourScore = document.createElement("p");
+
+  endTitle.className = "quiz-title";
+  yourScore.className = "quiz-body";
+
+  quizTitleEl.appendChild(endTitle);
+  quizTitleEl.appendChild(yourScore);
+
+  //   page displays
+  endTitle.textContent = "You are finished. Good job!";
+  yourScore.textContent = "Score: " + timeLeft;
+
+  //   initials area for local storage
+  const initialContainer = document.createElement("div");
+  quizTitleEl.appendChild(initialContainer);
+  initialContainer.className = "quiz-body";
+
+  initialBox = document.createElement("input");
+  initialContainer.appendChild(initialBox);
+  initialBox.setAttribute("placeholder", "Your Initials");
+  initialBox.setAttribute("type", "text");
+  initialBox.setAttribute("class", "initial");
+
+  const submitBtn = document.createElement("button");
+  initialContainer.appendChild(submitBtn);
+  submitBtn.setAttribute("class", "start-btn");
+  submitBtn.setAttribute("type", "submit");
+  submitBtn.textContent = "Submit";
+
+  submitBtn.addEventListener("click", addScore);
+}
+
+let initialBox;
+
+function addScore() {
+  let initials = initialBox.value;
+
+  if (initials === "" || initials === null) {
+    alert("You need to enter a valid initials");
+    return;
+  } else {
+    // Class instructor and TA provided below info
+    let highScore = JSON.parse(localStorage.getItem("highScore"));
+    if (highScore === null) {
+      highScore = [];
+    } else {
+      let score = {
+        initials: initials,
+        score: timeLeft,
+      };
+      highScore.push(score);
+      console.log(highScore);
+    }
+
+    localStorage.setItem("highScore", JSON.stringify(highScore));
   }
 }
