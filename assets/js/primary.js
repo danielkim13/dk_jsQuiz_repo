@@ -192,7 +192,7 @@ function addScore() {
         score: timeLeft,
       };
       highScore.push(score);
-      console.log(highScore);
+    //   console.log(highScore);
     }
 
     localStorage.setItem("highScore", JSON.stringify(highScore));
