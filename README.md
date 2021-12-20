@@ -3,10 +3,13 @@
 
 <hr />
 
-    - 🔭 You may find the deployed application link is **Deployment Link**
-    - I'm currently learning ** HTML, CSS, JavaScript and git **
-    - 👨‍💻This project repo can be found at **repo address**
-    - 📫How to reach me **daniel.d.kim13@gmail.com**
+### 🔭 You may find the deployed application link is (https://danielkim13.github.io/dk_jsQuiz_repo/)
+
+### I'm currently learning ** HTML, CSS, JavaScript and git **
+
+### 👨‍💻This project repo can be found at (https://github.com/danielkim13/dk_jsQuiz_repo)
+
+### 📫How to reach me **daniel.d.kim13@gmail.com**
 
 #### Previous GW Boot Camp Assignments:
 
