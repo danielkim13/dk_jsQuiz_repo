@@ -1,13 +1,14 @@
 const buttonEl = document.querySelector("#startButton");
 let timeLeft = 60;
 let questionArrayIndex = 0; //without this the loop only displays the last question on the page.
+let timeInterval;
 
 // write a function where the btn is clicked and timer starts
+let timerEl = document.getElementById("timerBox");
 function timerStart() {
-  const timerEl = document.getElementById("timerBox");
   //   ! ensure the timeLeft value back 60 seconds!!
   timerEl.className = "timer-box";
-  const timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     if (timeLeft > 0) {
       timerEl.textContent = "Time:  " + timeLeft;
       timeLeft--;
@@ -19,6 +20,25 @@ function timerStart() {
   }, 1000);
 
   quizPrompt(questionArrayIndex); //as timer begin, it calls for quizPrompt function
+}
+
+function done() {
+  clearInterval(timeInterval);
+  timerEl.style.display = "none";
+  quizQEl.remove();
+  answerEl.remove();
+
+  const endTitle = document.createElement("h1");
+  const yourScore = document.createElement("p");
+
+  endTitle.className = "quiz-title";
+  yourScore.className = "quiz-body";
+
+  quizTitleEl.appendChild(endTitle);
+  quizTitleEl.appendChild(yourScore);
+
+  endTitle.textContent = "You are finished. Good job!";
+  yourScore.textContent = "Score: " + timeLeft;
 }
 
 buttonEl.addEventListener("click", timerStart); //timer start event
@@ -64,12 +84,12 @@ const quizArray = [
   },
 ];
 
-const quizTitleEl = document.getElementById("quizContainer");
-const quizQEl = document.createElement("h2");
-const answerEl = document.createElement("ul");
-const selectionListEl1 = document.createElement("li");
-const selectionListEl2 = document.createElement("li");
-const selectionListEl3 = document.createElement("li");
+const quizTitleEl = document.getElementById("quizContainer"); //using it for end page as well
+const quizQEl = document.createElement("h2"); //using this var in different function
+const answerEl = document.createElement("ul"); //using this var in different function
+const selectionListEl1 = document.createElement("li"); //if i make this to local var, questions get added onto the page. need to be global to remove
+const selectionListEl2 = document.createElement("li"); //if i make this to local var, questions get added onto the page. need to be global to remove
+const selectionListEl3 = document.createElement("li"); //if i make this to local var, questions get added onto the page. need to be global to remove
 // Giving credit to Rhea Malviya for helping me with not doing for loop method but the call on the function as arrayIndex increase. Initial attempt was to do it with for loop method but couldn't figure it out.
 function quizPrompt(questionArrayIndex) {
   // create h2 element in the quiz container div
@@ -101,9 +121,10 @@ function quizPrompt(questionArrayIndex) {
 function answerHandler(event) {
   const answerResultEl = document.createElement("p"); //need to remove it so made it global
   const targetEl = event.target;
+  const sectionEl = document.querySelector(".quiz-overall-container");
 
   answerResultEl.setAttribute("class", "answer-result");
-  quizTitleEl.appendChild(answerResultEl);
+  sectionEl.appendChild(answerResultEl);
   // comparing answers to see if it was correct or wrong.
   if (targetEl.textContent == quizArray[questionArrayIndex].answer) {
     answerResultEl.textContent = "Correct Answer!";
@@ -115,7 +136,7 @@ function answerHandler(event) {
 
   setTimeout(() => {
     answerResultEl.style.display = "none";
-  }, 700);
+  }, 400);
 
   // increase the index so another question can be presented
   questionArrayIndex++;
@@ -125,7 +146,8 @@ function answerHandler(event) {
     answerEl.remove();
 
     quizPrompt(questionArrayIndex);
-  } else {
-    byeBye();
+  }
+  if (questionArrayIndex === quizArray.length) {
+    done();
   }
 }
