@@ -134,14 +134,19 @@ function answerHandler(event) {
   }
 }
 // end of the quiz page
+let endTitle;
+let yourScore;
+let initialContainer;
+let submitBtn;
+
 function done() {
   clearInterval(timeInterval);
   timerEl.style.display = "none";
   quizQEl.remove();
   answerEl.remove();
 
-  const endTitle = document.createElement("h1");
-  const yourScore = document.createElement("p");
+  endTitle = document.createElement("h1");
+  yourScore = document.createElement("p");
 
   endTitle.className = "quiz-title";
   yourScore.className = "quiz-body";
@@ -154,7 +159,7 @@ function done() {
   yourScore.textContent = "Score: " + timeLeft;
 
   //   initials area for local storage
-  const initialContainer = document.createElement("div");
+  initialContainer = document.createElement("div");
   quizTitleEl.appendChild(initialContainer);
   initialContainer.className = "quiz-body";
 
@@ -164,7 +169,7 @@ function done() {
   initialBox.setAttribute("type", "text");
   initialBox.setAttribute("class", "initial");
 
-  const submitBtn = document.createElement("button");
+  submitBtn = document.createElement("button");
   initialContainer.appendChild(submitBtn);
   submitBtn.setAttribute("class", "start-btn");
   submitBtn.setAttribute("type", "submit");
@@ -174,7 +179,7 @@ function done() {
 }
 
 let initialBox;
-
+let highScore;
 function addScore() {
   let initials = initialBox.value;
 
@@ -186,7 +191,7 @@ function addScore() {
     return;
   } else {
     // Class instructor and TA provided below info
-    let highScore = JSON.parse(localStorage.getItem("highScore"));
+    highScore = JSON.parse(localStorage.getItem("highScore"));
     if (highScore === null) {
       highScore = [];
     } else {
@@ -205,5 +210,34 @@ function addScore() {
 }
 
 function highScorePage() {
-  window.open;
+  endTitle.remove();
+  yourScore.remove();
+  initialBox.remove();
+  submitBtn.remove();
+
+  highScore = JSON.parse(localStorage.getItem("highScore"));
+  const noScore = document.createElement("p");
+  const orderListEl = document.createElement("ol");
+  const listScore = document.createElement("li");
+
+  if (highScore === null) {
+    quizTitleEl.appendChild(noScore);
+
+    noScore.textContent = "No High Scores Available";
+    noScore.className = "quiz-body";
+  }
+  if (highScore !== null) {
+    listScore.className = "quiz-body";
+
+    for (let i = 0; i < highScore.length; i++) {
+      const name = highScore[i].initials;
+      const scores = highScore[i].score;
+      listScore.textContent = name + ":    " + scores;
+      quizTitleEl.appendChild(orderListEl);
+      orderListEl.appendChild(listScore);
+    }
+  }
 }
+
+const scorePage = document.querySelector("#scoreContainer");
+scorePage.addEventListener("click", highScorePage);
