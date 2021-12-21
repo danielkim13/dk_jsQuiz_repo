@@ -180,6 +180,7 @@ function done() {
 
 let initialBox;
 let highScore = [];
+let orderListEl;
 
 function addScore() {
   let initials = initialBox.value;
@@ -197,13 +198,12 @@ function addScore() {
     return;
   } else {
     // Class instructor and TA provided below info
-    highScore = JSON.parse(localStorage.getItem("highScore")) || []; //researched but i don't understand this
+    highScore = JSON.parse(localStorage.getItem("highScore")); //researched but i don't understand this
     if (highScore === null) {
-      highScore;
-    } else {
-      highScore.push(score);
-      localStorage.setItem("highScore", JSON.stringify(highScore));
+      highScore = [];
     }
+    highScore.push(score);
+    localStorage.setItem("highScore", JSON.stringify(highScore));
   }
   highScorePage();
 }
@@ -218,7 +218,7 @@ function highScorePage() {
   highScore = JSON.parse(localStorage.getItem("highScore"));
   const noScore = document.createElement("p");
   const orderListEl = document.createElement("ol");
-  const listScore = document.createElement("li");
+  quizTitleEl.appendChild(orderListEl);
 
   if (highScore === null) {
     quizTitleEl.appendChild(noScore);
@@ -227,13 +227,12 @@ function highScorePage() {
     noScore.className = "quiz-body";
   }
   if (highScore !== null) {
-    listScore.className = "quiz-body";
-
     for (let i = 0; i < highScore.length; i++) {
+      const listScore = document.createElement("li");
       const name = highScore[i].initials;
       const scores = highScore[i].score;
+      listScore.className = "quiz-body";
       listScore.textContent = name + ":    " + scores;
-      quizTitleEl.appendChild(orderListEl);
       orderListEl.appendChild(listScore);
     }
   }
@@ -247,7 +246,7 @@ function highScorePage() {
   againBtn.className = "start-btn";
   againBtn.textContent = "Play Again";
   againBtn.addEventListener("click", function () {
-    open("https://danielkim13.github.io/dk_jsQuiz_repo/");
+    window.location.reload();
   });
 
   const clearScoreBtn = document.createElement("button");
@@ -257,5 +256,6 @@ function highScorePage() {
   clearScoreBtn.textContent = "Clear Scores";
   clearScoreBtn.addEventListener("click", function () {
     localStorage.clear();
+    orderListEl.remove();
   });
 }
