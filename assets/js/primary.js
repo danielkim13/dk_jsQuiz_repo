@@ -179,33 +179,32 @@ function done() {
 }
 
 let initialBox;
-let highScore;
+let highScore = [];
+
 function addScore() {
   let initials = initialBox.value;
+  let score = {
+    initials: initials,
+    score: timeLeft,
+  };
 
   if (initials === "" || initials === null) {
     alert("You need to enter a valid initials");
     return;
-  } else if (initials.length > 3) {
-    alert("Please enter your initials");
+  }
+  if (initials.length > 3) {
+    alert("Initials cannot exceed three characters");
     return;
   } else {
     // Class instructor and TA provided below info
-    highScore = JSON.parse(localStorage.getItem("highScore"));
+    highScore = JSON.parse(localStorage.getItem("highScore")) || []; //researched but i don't understand this
     if (highScore === null) {
-      highScore = [];
+      highScore;
     } else {
-      let score = {
-        initials: initials,
-        score: timeLeft,
-      };
       highScore.push(score);
-      //   console.log(highScore);
+      localStorage.setItem("highScore", JSON.stringify(highScore));
     }
-
-    localStorage.setItem("highScore", JSON.stringify(highScore));
   }
-
   highScorePage();
 }
 
@@ -242,6 +241,7 @@ function highScorePage() {
   const overAllContainer = document.querySelector(".quiz-overall-container");
   const btnDiv = document.createElement("div");
   const againBtn = document.createElement("button");
+  btnDiv.className = "buttons-container";
   overAllContainer.appendChild(btnDiv);
   btnDiv.appendChild(againBtn);
   againBtn.className = "start-btn";
