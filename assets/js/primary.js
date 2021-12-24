@@ -1,5 +1,5 @@
 const buttonEl = document.querySelector("#startButton");
-let timeLeft = 5;
+let timeLeft = 60;
 let questionArrayIndex = 0; //without this the loop only displays the last question on the page.
 let timeInterval;
 let score;
@@ -17,7 +17,7 @@ function timerStart() {
       timerEl.textContent = "Time is Up";
       clearInterval(timeInterval);
       //   TODO send the page to where user can enter name and leads to score
-      done();
+      done(); // grader comment fixed.. it was a bug in previous release
     }
   }, 1000);
 
