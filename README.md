@@ -3,11 +3,11 @@
 
 <hr />
 
-### 🔭 You may find the deployed application link is (https://danielkim13.github.io/dk_jsQuiz_repo/)
+### 🔭 You may find the deployed application link is <mark>https://danielkim13.github.io/dk_jsQuiz_repo/</mark>
 
 ### I'm currently learning ** HTML, CSS, JavaScript and git **
 
-### 👨‍💻This project repo can be found at (https://github.com/danielkim13/dk_jsQuiz_repo)
+### 👨‍💻This project repo can be found at <mark>https://github.com/danielkim13/dk_jsQuiz_repo</mark>
 
 ### 📫How to reach me **daniel.d.kim13@gmail.com**
 
