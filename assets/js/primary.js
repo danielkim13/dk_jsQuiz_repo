@@ -1,5 +1,5 @@
 const buttonEl = document.querySelector("#startButton");
-let timeLeft = 60;
+let timeLeft = 5;
 let questionArrayIndex = 0; //without this the loop only displays the last question on the page.
 let timeInterval;
 let score;
@@ -17,6 +17,7 @@ function timerStart() {
       timerEl.textContent = "Time is Up";
       clearInterval(timeInterval);
       //   TODO send the page to where user can enter name and leads to score
+      done();
     }
   }, 1000);
 
@@ -179,7 +180,7 @@ function done() {
 }
 
 let initialBox;
-let highScore = [];
+let highScore = JSON.parse(localStorage.getItem("highScore")) || [];
 let orderListEl;
 
 function addScore() {
@@ -198,10 +199,9 @@ function addScore() {
     return;
   } else {
     // Class instructor and TA provided below info
-    highScore = JSON.parse(localStorage.getItem("highScore")); //researched but i don't understand this
-    if (highScore === null) {
-      highScore = [];
-    }
+    // highScore = JSON.parse(localStorage.getItem("highScore")) || []; //researched but i don't understand this
+    // if (highScore === null) {
+    //   highScore =[];
     highScore.push(score);
     localStorage.setItem("highScore", JSON.stringify(highScore));
   }
